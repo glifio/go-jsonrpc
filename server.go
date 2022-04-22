@@ -82,6 +82,8 @@ func (s *RPCServer) handleWS(ctx context.Context, w http.ResponseWriter, r *http
 func (s *RPCServer) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	h := strings.ToLower(r.Header.Get("Connection"))
 	if strings.Contains(h, "upgrade") {
 		s.handleWS(ctx, w, r)
